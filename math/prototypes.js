@@ -29,7 +29,8 @@ Array.prototype.sum = function() {
 				}
 			} else if (typeof this[i] === "string") {
 				var retry = +this[i];
-				if (typeof retry === "number" && retry !== "NaN") {
+				if(!isNaN(retry)) {
+				//if(typeof retry === "number" && retry !== NaN) {
 					var decLength = (retry.toString().split('.')[1] || []).length;
 					if(decLength > decimals) {
 						decimals = decLength;

@@ -1,4 +1,4 @@
-// This prototype allows you to sum the numbers in an array. Once an array has been summed, a new
+/* This prototype allows you to sum the numbers in an array. Once an array has been summed, a new
  * member of the array called "total" will be added to the array. It's smart enough to convert
  * strings in quotes into JavaScript number types if the strings are numbers.
  *
@@ -11,6 +11,7 @@
  * var mySecondNum = [0.002312, 2000.1, 0.2]
  * mySecondNum.sum();
  * console.log(mySecondNum.total);                          // Returns 2000.302312
+ */
 
 Array.prototype.sum = function() {
 	var k = Object.keys(this);

@@ -11,18 +11,70 @@
  * For more information, go to https://github.com/GoodDamon/multitool
  */
 
-Array.prototype.mm = function(type) {
-	if(type !== "sum" && type !== "multiply" && type !== "average" && type !== "all") {
-		console.log("Math Multitool\n--------------\nUsage: array.mm('<type>')\nAvailable types are:\n  sum\n  multiply\n  average");
+Array.prototype.mm = function() {
+	// Usage
+	var usage = "Math Multitool\n" + 
+		"--------------\n" + 
+		"Usage: array.mm('<options>')\n" + 
+		"Available options are:\n" + 
+		"  sum\n" + 
+		"  multiply\n" + 
+		"  average\n" + 
+		"  median\n" + 
+		"  all (performs all available calculations";
+
+	// Available options
+	var options = [
+		"sum",
+		"multiply",
+		"average",
+		"median",
+		"all"
+	];
+
+	// Disabled by default
+	var enableSum = false;
+	var enableMultiply = false;
+	var enableAverage = false;
+	var enableMedian = false;
+
+	// Options requested and error checking
+	if(arguments.length === 0) {
+		console.log(usage);
+		console.log("No options specified!");
 		return;
 	}
+	for(var i = 0; i < arguments.length; i++) {
+		if(options.indexOf(arguments[i]) === 0) enableSum = true;
+		else if(options.indexOf(arguments[i]) === 1) enableMultiply = true;
+		else if(options.indexOf(arguments[i]) === 2) enableAverage = true;
+		else if(options.indexOf(arguments[i]) === 3) enableMedian = true;
+		else if(options.indexOf(arguments[i]) === 4) {
+			enableSum = true;
+			enableMultiply = true;
+			enableAverage = true;
+			enableMedian = true;
+		} else {
+			console.log(usage);
+			console.log("Unrecognized option '" + argument[i] + "' requested!");
+			return;
+		}
+    }
+	if(this.length === 0) {
+		console.log(usage);
+		console.log("Cannot process empty array!");
+		return;
+	}
+
+	console.log(enableSum, enableMultiply, enableAverage, enableMedian);
+
+	// Get keys, decimals, and check to make sure none of the array members are objects or strings that can't be converted to numbers.
 	var k = Object.keys(this);
 
 	var decimals = 0;
 
-	// First we replace strings with numbers and get the longest decimal length
 	for (var i = 0; i < this.length; i++) {
-		if(k[i] !== "total") { // Avoid including a "total" if one already exists.
+		if(options.indexOf(k[i]) === -1) { // Avoid including an mm total.
 			if (typeof this[i] === "number") {
 				var decLength = (this[i].toString().split('.')[1] || []).length;
 				if(decLength > decimals) {
@@ -55,10 +107,10 @@ Array.prototype.mm = function(type) {
 	}
 
 	// Sum
-	if(type === "sum" || type === "all") {
+	if(enableSum) {
 		var sum = 0;
 		for (var i = 0; i < this.length; i++) {
-			if(k[i] !== "sum" && k[i] !== "product" && k[i] !== "average") { // Again, avoid including a "total" if one already exists.
+			if(options.indexOf(k[i]) === -1) { // Avoid including an mm total.
 				var entry = this[i] * multiplier;
 				sum += entry;
 			}
@@ -67,11 +119,11 @@ Array.prototype.mm = function(type) {
 	}
 
 	// Product
-	if(type === "multiply" || type === "all") {
+	if(enableMultiply) {
 		var product = 0;
 		var entries = [];
 		for(var i = 0; i < this.length; i++) {
-			if(k[i] !== "sum" && k[i] !== "product" && k[i] !== "average") { // Again, avoid including a "total" if one already exists.
+			if(options.indexOf(k[i]) === -1) { // Avoid including an mm total.
 				var entry = this[i] * multiplier;
 				entries.push(entry);
 			}
@@ -94,19 +146,48 @@ Array.prototype.mm = function(type) {
 	}
 
 	// Average
-	if(type === "average" || type === "all") {
-		var average = 0;
+	if(enableAverage) {
+		var mean = 0;
 		var entries = [];
 		for(var i = 0; i < this.length; i++) {
-			if(k[i] !== "total") { // Again, avoid including a "total" if one already exists.
+			if(options.indexOf(k[i]) === -1) { // Avoid including an mm total.
 				var entry = this[i] * multiplier;
 				entries.push(entry);
 			}
 		}
 		for (var i = 0; i < entries.length; i++) {
-			average += entries[i];
+			mean += entries[i];
 		}
-		average = average/entries.length;
-		this["average"] = average/multiplier;
+		mean = mean/entries.length;
+		this["mean"] = mean/multiplier;
 	}
-}
+
+	// Median
+	if(enableMedian) {
+		var entries = [];
+		for(var i = 0; i < this.length; i++) {
+			if(options.indexOf(k[i]) === -1) { // Avoid including an mm total.
+				var entry = this[i] * multiplier;
+				entries.push(entry);
+			}
+		}
+		if(entries.length === 1) { // The array has only one object. Return it.
+			this["median"] = this[0];
+		} else {		
+			entries.sort(
+				function(a,b) {
+					return parseFloat(a) - parseFloat(b);
+				}
+			);
+			var half = Math.floor(entries.length / 2);
+			if(entries.length % 2) {
+				this["median"] = entries[half] / multiplier;
+			} else {
+				var low = entries[half - 1];
+				var high = entries[half];
+				median = (high + low) / 2;
+				this["median"] = median / multiplier;
+			}
+		}
+	}
+};

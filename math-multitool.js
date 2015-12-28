@@ -66,8 +66,6 @@ Array.prototype.mm = function() {
 		return;
 	}
 
-	console.log(enableSum, enableMultiply, enableAverage, enableMedian);
-
 	// Get keys, decimals, and check to make sure none of the array members are objects or strings that can't be converted to numbers.
 	var k = Object.keys(this);
 

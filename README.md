@@ -6,10 +6,12 @@ Right now, the only multitool available is math-multitool.js. It provides an arr
 
 #### Example
 (Plain JavaScript):
+
 `var x = [0.1,0.2];`
 `console.log(x[0] + x[1]);          // Returns 0.30000000000000004`
 
 (With math-multitool):
+
 `x.mm("sum");`
 `console.log(x.sum);                // Returns 0.3`
 

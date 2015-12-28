@@ -8,11 +8,13 @@ Right now, the only multitool available is math-multitool.js. It provides an arr
 (Plain JavaScript):
 
 `var x = [0.1,0.2];`
+
 `console.log(x[0] + x[1]);          // Returns 0.30000000000000004`
 
 (With math-multitool):
 
 `x.mm("sum");`
+
 `console.log(x.sum);                // Returns 0.3`
 
 At this time, the available options are "sum", "mutliply", and "average", which append "sum", "product", and "average" objects to the array respectively. To create all at once, use the "all" option.

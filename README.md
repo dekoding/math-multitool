@@ -44,7 +44,8 @@ x.mm("all");
 console.log(x.sum);					// Returns 0.7
 console.log(x.product);				// Returns 0.008
 console.log(x.mean);				// Returns 0.23333333333333334
-									// For repeating decimals, the number of digits returned is determined by JavaScript rounding
+									// For repeating decimals, the number of digits returned
+									// is determined by JavaScript rounding
 
 console.log(x.median);				// Returns 0.2
 ```

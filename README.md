@@ -16,14 +16,18 @@ The syntax for math-multitool is:
 #### Example
 In plain JavaScript, decimal arithmetic can be inaccurate:
 
-```var x = [0.1,0.2];`
+```var x = [0.1,0.2];
+
 console.log(x[0] + x[1]);			// Returns 0.30000000000000004
+
 console.log(x[0] * x[1]);			// Returns 0.020000000000000004```
 
 With math-multitool, decimal calculations will be accurate up to 15 digits:
 
 ```x.mm("sum", "multiply");
+
 console.log(x.sum);					// Returns 0.3
+
 console.log(x.product);				// Returns 0.02```
 
 ## Plans

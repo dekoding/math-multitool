@@ -21,6 +21,7 @@ Array.prototype.mm = function() {
 		"  multiply\n" + 
 		"  average\n" + 
 		"  median\n" + 
+		"  mode\n" + 
 		"  all (performs all available calculations";
 
 	// Available options
@@ -29,6 +30,7 @@ Array.prototype.mm = function() {
 		"multiply",
 		"average",
 		"median",
+		"mode",
 		"all"
 	];
 
@@ -37,6 +39,7 @@ Array.prototype.mm = function() {
 	var enableMultiply = false;
 	var enableAverage = false;
 	var enableMedian = false;
+	var enableMode = false;
 
 	// Options requested and error checking
 	if(arguments.length === 0) {
@@ -49,11 +52,13 @@ Array.prototype.mm = function() {
 		else if(options.indexOf(arguments[i]) === 1) enableMultiply = true;
 		else if(options.indexOf(arguments[i]) === 2) enableAverage = true;
 		else if(options.indexOf(arguments[i]) === 3) enableMedian = true;
-		else if(options.indexOf(arguments[i]) === 4) {
+		else if(options.indexOf(arguments[i]) === 4) enableMode = true;
+		else if(options.indexOf(arguments[i]) === 5) {
 			enableSum = true;
 			enableMultiply = true;
 			enableAverage = true;
 			enableMedian = true;
+			enableMode = true;
 		} else {
 			console.log(usage);
 			console.log("Unrecognized option '" + argument[i] + "' requested!");
@@ -143,7 +148,7 @@ Array.prototype.mm = function() {
 		this["product"] = product/divisor;
 	}
 
-	// Average
+	// Mean
 	if(enableAverage) {
 		var mean = 0;
 		var entries = [];
@@ -186,6 +191,40 @@ Array.prototype.mm = function() {
 				median = (high + low) / 2;
 				this["median"] = median / multiplier;
 			}
+		}
+	}
+
+	// Mode
+	if(enableMode) {
+		var max = 0;
+		var mode = [];
+		var entries = [];
+		for(var i = 0; i < this.length; i++) {
+			if(options.indexOf(k[i]) === -1) { // Avoid including an mm total.
+				entries.push(this[i] * multiplier);
+			}
+		}
+
+		var str = entries.sort();
+		str = "~" + str.join('~~') + "~";
+		str.replace( /(~\-?\d+~)\1*/g, function(a,b){
+			var m = a.length / b.length;
+			if (max <= m ) {
+				if (max < m) {mode = [];max = m;}
+				mode.push( +b.replace(/~/g,""));
+			}
+		});
+		if(mode.length > 1) {
+			if(mode.length === entries.length) { // No duplicate entries exist in the array
+				this["mode"] = 0;
+			} else {
+				for(var i = 0; i < mode.length; i++) {
+					mode[i] = mode[i] / multiplier;
+				}
+				this["mode"] = mode;
+			}
+		} else {
+			this["mode"] = mode[0] / multiplier;
 		}
 	}
 };

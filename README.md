@@ -12,6 +12,7 @@ The syntax for math-multitool is:
 * "multiply"
 * "average"
 * "median"
+* "mode"
 * "all" (Performs all calculations)
 
 #### Example
@@ -33,6 +34,10 @@ console.log(x.sum);					// Returns 0.3
 console.log(x.product);				// Returns 0.02
 console.log(x.mean);				// Returns 0.15
 console.log(x.median);				// Returns 0.15
+console.log(x.mode);				// If the array contains more instances of one number than any
+									// other, mode returns that number. If more than one number
+									// is tied for most entries, all such numbers are returned in
+									// an array.
 ```
 
 Arrays can be updated and the calculations can be rerun:

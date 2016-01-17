@@ -13,6 +13,8 @@ The syntax for math-multitool is:
 * "average"
 * "median"
 * "mode"
+* "max"
+* "min"
 * "all" (Performs all calculations)
 
 #### Example

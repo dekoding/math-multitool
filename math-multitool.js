@@ -22,6 +22,8 @@ Array.prototype.mm = function() {
 		"  average\n" + 
 		"  median\n" + 
 		"  mode\n" + 
+		"  max\n" + 
+		"  min\n" + 
 		"  all (performs all available calculations";
 
 	// Available options
@@ -31,6 +33,8 @@ Array.prototype.mm = function() {
 		"average",
 		"median",
 		"mode",
+		"max",
+		"min",
 		"all"
 	];
 
@@ -40,6 +44,8 @@ Array.prototype.mm = function() {
 	var enableAverage = false;
 	var enableMedian = false;
 	var enableMode = false;
+	var enableMax = false;
+	var enableMin = false;
 
 	// Options requested and error checking
 	if(arguments.length === 0) {
@@ -53,12 +59,16 @@ Array.prototype.mm = function() {
 		else if(options.indexOf(arguments[i]) === 2) enableAverage = true;
 		else if(options.indexOf(arguments[i]) === 3) enableMedian = true;
 		else if(options.indexOf(arguments[i]) === 4) enableMode = true;
-		else if(options.indexOf(arguments[i]) === 5) {
+		else if(options.indexOf(arguments[i]) === 5) enableMax = true;
+		else if(options.indexOf(arguments[i]) === 6) enableMin = true;
+		else if(options.indexOf(arguments[i]) === 7) {
 			enableSum = true;
 			enableMultiply = true;
 			enableAverage = true;
 			enableMedian = true;
 			enableMode = true;
+			enableMax = true;
+			enableMin = true;
 		} else {
 			console.log(usage);
 			console.log("Unrecognized option '" + argument[i] + "' requested!");
@@ -227,4 +237,12 @@ Array.prototype.mm = function() {
 			this["mode"] = mode[0] / multiplier;
 		}
 	}
+	// Max and min, courtesy of John Resig's pure, unadulterated genius
+	if(enableMax) {
+    	this["max"] = Math.max.apply(Math, this);
+    }
+
+    if(enableMin) {
+    	this["min"] = Math.min.apply(Math, this);
+    }
 };

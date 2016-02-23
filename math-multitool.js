@@ -4,13 +4,17 @@
  * This JavaScript library is free to use under the MIT License.
  * ==========================================================================
  * 
- * This prototype allows you to quickly and easily perform a wide range of
- * accurate mathematical calculations on arrays of numbers (or strings that
- * can be converted into numbers).
+ * Math Multitool allows you to quickly and easily perform a wide range of
+ * accurate mathematical calculations on numbers and arrays of numbers (or
+ * strings that can be converted into numbers).
  *
  * For more information, go to https://github.com/GoodDamon/multitool
  */
 
+/* This array prototype allows you to take an array of numbers and sum them,
+ * multiply them, find their mean, median, and mode, and get the largest and
+ * smallest value.
+ */ 
 Array.prototype.mm = function() {
 	// Usage
 	var usage = "Math Multitool\n" + 
@@ -245,4 +249,37 @@ Array.prototype.mm = function() {
     if(enableMin) {
     	this["min"] = Math.min.apply(Math, this);
     }
+};
+
+/* The mm functions provide quick and easy tools for converting a number to a
+ * fraction or reversing the process. Especially handy for dealing elegantly
+ * with decimals.
+ */
+
+var mm = {
+	fractionalize: function(number) {
+		var decLength = (number.toString().split('.')[1] || []).length;
+		var multiplier = Math.pow(10, decLength + 1);
+		var numerator = Math.round(number * multiplier) / 10;
+		var denominator = multiplier / 10;
+
+		var fraction = [numerator, denominator];
+		return fraction;
+	},
+	decimalize: function(numerator, denominator) {
+		var decimals = 0;
+		var numeratorLength = (numerator.toString().split('.')[1] || []).length;
+		var denominatorLength = (denominator.toString().split('.')[1] || []).length;
+		if (numeratorLength > decimals && numeratorLength > denominatorLength) {
+			decimals = numeratorLength;
+		}
+		if (denominatorLength > decimals && denominatorLength > numeratorLength) {
+			decimals = denominatorLength;
+		}
+		// Extra precaution
+		decimals += 1;
+
+		var value = ((Math.pow(10, decimals)) * numerator) / ((Math.pow(10, decimals)) * denominator);
+		return value;
+	}
 };

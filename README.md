@@ -1,21 +1,21 @@
-# Multitool
-A collection of simple, handy JavaScript functions, objects, prototypes, etc.
+# Math Multitool
+A collection of simple, handy JavaScript math tools that can be implemented anywhere.
 
 ## Usage
-Right now, the only multitool available is math-multitool.js. It provides an array prototype that allows you to sum, multiply, average, and get the median of arrays of numbers accurately, including decimals, up to fifteen decimal digits. It also provides two functions, `mm.fractionalize()` and `mm.decimalize()`.
+Math Multitool provides an array prototype that allows you to do things like sum, multiply, average, and get the median of arrays of numbers accurately, including decimals, up to fifteen decimal digits. It also provides two utility functions, `mm.fractionalize()` and `mm.decimalize()`.
 
-The syntax for the math-multitool prototype is:
+The syntax for the prototype is:
 `array.mm(options);`
 
 ...where *options* is one or more of:
-* "sum"
-* "multiply"
-* "average"
-* "median"
-* "mode"
-* "max"
-* "min"
-* "all" (Performs all calculations)
+* 'sum'
+* 'multiply'
+* 'average'
+* 'median'
+* 'mode'
+* 'max'
+* 'min'
+* 'all' (Performs all calculations)
 
 The syntax for the fractionalize and decimalize functions are:
 ```javascript
@@ -27,36 +27,35 @@ mm.decimalize(numerator, denominator);
 In plain JavaScript, decimal calculations can be inaccurate:
 
 ```javascript
-var x = [0.1,0.2];
+const x = [0.1,0.2];
 
 console.log(x[0] + x[1]);			// Returns 0.30000000000000004
 console.log(x[0] * x[1]);			// Returns 0.020000000000000004
 ```
 
-With math-multitool, decimal calculations will be accurate up to 15 digits:
+With Math Multitool, decimal calculations will be accurate up to 15 digits:
 
 ```javascript
-x.mm("all");
+let result = x.mm('all');
 
-console.log(x.sum);					// Returns 0.3
-console.log(x.product);				// Returns 0.02
-console.log(x.mean);				// Returns 0.15
-console.log(x.median);				// Returns 0.15
-console.log(x.mode);				// If the array contains more instances of one number than any
-									// other, mode returns that number. If more than one number
-									// is tied for most entries, all such numbers are returned in
-									// an array.
+console.log(result.sum);			// Returns 0.3
+console.log(result.product);		// Returns 0.02
+console.log(result.mean);   		// Returns 0.15
+console.log(result.median);	    	// Returns 0.15
+console.log(result.mode);	    	// Returns 0
+
 ```
+Note: If the array contains more instances of one number than any other, mode returns that number. If more than one number is tied for most entries, all such numbers are returned in an array.
 
 Arrays can be updated and the calculations can be rerun:
 
 ```javascript
-x[2] = 0.4;
-x.mm("all");
+x.push(0.4);
+result = x.mm('all');
 
-console.log(x.sum);					// Returns 0.7
-console.log(x.product);				// Returns 0.008
-console.log(x.mean);				// Returns 0.23333333333333334
+console.log(result.sum);			// Returns 0.7
+console.log(result.product);		// Returns 0.008
+console.log(result.mean);			// Returns 0.23333333333333334
 									// For repeating decimals, the number of digits returned
 									// is determined by JavaScript rounding
 

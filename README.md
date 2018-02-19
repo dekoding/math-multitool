@@ -29,8 +29,8 @@ In plain JavaScript, decimal calculations can be inaccurate:
 ```javascript
 const x = [0.1,0.2];
 
-console.log(x[0] + x[1]);			// Returns 0.30000000000000004
-console.log(x[0] * x[1]);			// Returns 0.020000000000000004
+console.log(x[0] + x[1]);    // Returns 0.30000000000000004
+console.log(x[0] * x[1]);    // Returns 0.020000000000000004
 ```
 
 With Math Multitool, decimal calculations will be accurate up to 15 digits:
@@ -38,11 +38,11 @@ With Math Multitool, decimal calculations will be accurate up to 15 digits:
 ```javascript
 let result = x.mm('all');
 
-console.log(result.sum);			// Returns 0.3
-console.log(result.product);		// Returns 0.02
-console.log(result.mean);   		// Returns 0.15
-console.log(result.median);	    	// Returns 0.15
-console.log(result.mode);	    	// Returns 0
+console.log(result.sum);     // Returns 0.3
+console.log(result.product); // Returns 0.02
+console.log(result.mean);    // Returns 0.15
+console.log(result.median);  // Returns 0.15
+console.log(result.mode);    // Returns 0
 
 ```
 Note: If the array contains more instances of one number than any other, mode returns that number. If more than one number is tied for most entries, all such numbers are returned in an array.
@@ -53,20 +53,20 @@ Arrays can be updated and the calculations can be rerun:
 x.push(0.4);
 result = x.mm('all');
 
-console.log(result.sum);			// Returns 0.7
-console.log(result.product);		// Returns 0.008
-console.log(result.mean);			// Returns 0.23333333333333334
-									// For repeating decimals, the number of digits returned
-									// is determined by JavaScript rounding
+console.log(result.sum);     // Returns 0.7
+console.log(result.product); // Returns 0.008
+console.log(result.mean);    // Returns 0.23333333333333334
+                             // For repeating decimals, the number of digits returned
+                             // is determined by JavaScript rounding
 
-console.log(x.median);				// Returns 0.2
+console.log(x.median);       // Returns 0.2
 ```
 
 **Note**: Be careful how you add members! If you add a new member to the wrong place in the array - for example, with `x[3] = 0.4;` - you will create an object instead of a number. Math Multitool only supports JavaScript numbers and strings that can be converted to JavaScript numbers.
 
 ```javascript
-mm.fractionalize(0.24);				// Returns an array of [ 24, 100 ]
-mm.decimalize(3,17);				// Returns 0.17647058823529413
+mm.fractionalize(0.24);      // Returns an array of [ 24, 100 ]
+mm.decimalize(3,17);         // Returns 0.17647058823529413
 ```
 
 **Note**: Fractionalize is designed to return fractions with denominators equal to a power of 10. That is to say, rather than returning a fraction of 1/2, it will always return a fraction of 5/10. An option to return the lowest common denominator is planned for a future version.

@@ -6,7 +6,7 @@ A collection of simple, handy JavaScript math tools that can be implemented anyw
 
 In node:
 ```JavaScript
-const MMCalculator = require('MMCalculator');
+const MMCalculator = require('math-multitool');
 ```
 
 In browsers:

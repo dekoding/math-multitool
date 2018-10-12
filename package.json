@@ -1,0 +1,30 @@
+{
+  "name": "math-multitool",
+  "version": "1.0.0",
+  "description": "A handy Swiss Army knife of math tools",
+  "main": "math-multitool.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "node testing.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dekoding/math-multitool.git"
+  },
+  "keywords": [
+    "math",
+    "addition",
+    "subtraction",
+    "multiplication",
+    "division",
+    "median"
+  ],
+  "author": "Damon Kaswell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dekoding/math-multitool/issues"
+  },
+  "homepage": "https://github.com/dekoding/math-multitool#readme"
+}

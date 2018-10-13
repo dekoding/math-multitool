@@ -11,7 +11,7 @@ const MMCalculator = require('math-multitool');
 
 In browsers:
 ```HTML
-<script type="module"- src="./path/to/math-multitool.js"></script>
+<script type="module" src="./path/to/math-multitool.js"></script>
 ```
 
 -or-
@@ -30,7 +30,7 @@ console.log(x[0] + x[1]);    // Returns 0.30000000000000004
 console.log(x[0] * x[1]);    // Returns 0.020000000000000004
 ```
 
-Math Multitool provides a class (MMCalculator) with getters and utility methods that allow you to do things like sum, multiply, average, and get the median of arrays of numbers accurately. With MMCalculator, decimal calculations will be accurate up to 15 digits:
+Math Multitool provides a class (MMCalculator) with getters and utility methods that allow you to do things like sum, multiply, average, and get the median of arrays of numbers accurately. With MMCalculator, decimal calculations will be accurate up to 15 digits.
 
 Currently, MMCalculator will perform the following actions:
 
